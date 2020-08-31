@@ -19,27 +19,8 @@ services:
     networks:
       - aquarium_net
 
-  createbucket:
-    image: minio/mc:latest
-    depends_on:
-      - s3
-    entrypoint: >
-      /bin/sh -c "
-      while ! nc -z s3 9000; do
-        sleep 1;
-      done;
-      sleep 5;
-      /usr/bin/mc config host add aqminio http://s3:9000 ${S3_ID} ${S3_SECRET_ACCESS_KEY};
-      /usr/bin/mc mb --region ${S3_REGION} -p aqminio/images;
-      /usr/bin/mc policy set download aqminio/images;
-      exit 0;
-      "
-    networks:
-      - aquarium_net
-
   web:
     ports:
       - "${S3_PUBLIC_PORT}:9000"
     depends_on:
       - s3
-      - createbucket
