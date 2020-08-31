@@ -1,0 +1,12 @@
+web:
+    image: nginx:stable-alpine
+    ports:
+      - "${APP_PUBLIC_PORT}:80"
+    networks:
+      - aquarium_net
+    depends_on:
+      - app
+    volumes:
+      - public:/aquarium/public
+      - logs:/aquarium/log
+      - shared:/aquarium/shared
