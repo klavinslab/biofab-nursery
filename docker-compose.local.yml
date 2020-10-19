@@ -3,6 +3,16 @@ services:
   app:
     environment:
       S3_LOCAL: "yes"
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.route_localnet=1
+
+  krill:
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.conf.all.route_localnet=1
 
   web:
     volumes:
