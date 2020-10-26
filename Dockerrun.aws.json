@@ -1,0 +1,21 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "volumes": [
+
+    ],
+    "containerDefinitions": [
+        {
+            "name": "aquarium-app",
+            "image": "aquariumbio/aquarium:latest",
+            "essential": true
+        },
+        {
+            "name": "krill-app",
+            "image": "aquariumbio/aquarium:latest"
+        },
+        {
+            "name": "nginx-proxy",
+            "image": "nginx"
+        }
+    ]
+}

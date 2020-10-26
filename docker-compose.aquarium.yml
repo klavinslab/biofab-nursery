@@ -1,0 +1,51 @@
+# Docker-compose file for Aquarium and Krill services
+#
+version: "3.5"
+services:
+  app:
+    image: aquariumbio/aquarium:${AQUARIUM_VERSION}
+    command: ["production"]
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      S3_ACCESS_KEY_ID: ${S3_ID}
+      S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
+      S3_REGION: ${S3_REGION}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      TZ: ${TIMEZONE}
+    volumes:
+      - public:/aquarium/public
+      - logs:/aquarium/log
+      - shared:/aquarium/shared
+      - ./config/instance.yml:/aquarium/config/instance.yml
+    networks:
+      - aquarium_net
+    expose:
+      - "3000"
+
+  krill:
+    image: aquariumbio/aquarium:${AQUARIUM_VERSION}
+    command: ["krill", "production"]
+    networks:
+      - aquarium_net
+    expose:
+      - "3500"
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      S3_ACCESS_KEY_ID: ${S3_ID}
+      S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
+      S3_REGION: ${S3_REGION}
+      TZ: ${TIMEZONE}
+    depends_on:
+      - app
+
+networks:
+  aquarium_net:
+
+volumes:
+  public:
+  logs:
+  shared:
