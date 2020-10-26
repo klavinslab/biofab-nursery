@@ -10,7 +10,7 @@
 # Defaults are values set by Aquarium if not set here
 
 default: &default
-  instance_name: My Lab
+  instance_name: Nursery
 
 production:
   <<: *default
