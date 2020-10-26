@@ -1,4 +1,6 @@
-web:
+version: "3.5"
+services:
+  web:
     image: nginx:stable-alpine
     ports:
       - "${APP_PUBLIC_PORT}:80"
