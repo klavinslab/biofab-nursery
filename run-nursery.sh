@@ -2,5 +2,5 @@
 docker-compose \
  -f docker-compose.aquarium.yml \
  -f docker-compose.nginx.yml \
- -f docker-compose.local-web.yml \
+ -f docker-compose.nursery-web.yml \
  $@
