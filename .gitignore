@@ -1,1 +1,4 @@
 .env
+
+# snyk config
+.dccache
