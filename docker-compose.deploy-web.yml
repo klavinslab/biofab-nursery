@@ -1,3 +1,4 @@
+# Sets the nginx.conf file to use the "deploy" file 
 version: "3.5"
 services:
   web:
